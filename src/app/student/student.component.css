@@ -7,6 +7,20 @@ table, th, td {
   border-collapse: collapse;
 }
 
+button {
+  color: white;
+  background-color: black;
+}
+
+th {
+  background-color: black;
+  color: white;
+}
+
+td.last-column {
+  text-align: center;
+}
+
 tr:nth-child(even) {
   background-color: grey;
 }
