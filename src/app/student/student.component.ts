@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {StudentService} from '../services/student.service';
 import {Student} from '../model/student';
+import {Post} from '../model/post';
+import {PostService} from '../services/post.service';
 
 @Component({
   selector: 'app-student',
@@ -10,9 +12,10 @@ import {Student} from '../model/student';
 export class StudentComponent implements OnInit {
 
   students: Array<Student> = [];
+  posts: Array<Post> = [];
   private studentToUpdate: Student;
 
-  constructor(private studentService: StudentService) {
+  constructor(private studentService: StudentService, private postService: PostService) {
   }
 
   ngOnInit(): void {
@@ -30,6 +33,20 @@ export class StudentComponent implements OnInit {
     this.studentService.addStudent(newStudent1).subscribe();
     this.studentService.addStudent(newStudent2).subscribe();
     this.studentService.delete(2).subscribe();
+
+    this.postService.getPosts().subscribe(
+      response => {
+        this.posts = response;
+        this.students = this.matchPostToStudent(this.posts, this.students);
+      }
+    );
+  }
+
+  deleteRow(studentId: number): void {
+    console.log(studentId);
+    this.studentService.delete(studentId).subscribe(
+      () => this.students = this.students.filter(student => !student.id.toString().includes(studentId.toString()))
+    );
   }
 
   private createStudent(name: string, email: string, phone: number, website: string): Student {
@@ -42,10 +59,11 @@ export class StudentComponent implements OnInit {
     return student;
   }
 
-  deleteRow(studentId: number): void {
-    console.log(studentId);
-    this.studentService.delete(studentId).subscribe();
-    this.students = this.students.filter(student => !student.id.toString().includes(studentId.toString()));
+  matchPostToStudent(posts: Array<Post>, students: Array<Student>): Array<Student> {
+    students.forEach(student => student.posts = posts.filter(post => post.userId === student.id)
+      .map(post => post.id));
+
+    return students;
   }
 
 }

@@ -21,6 +21,10 @@ export class StudentService {
   getStudents(): Observable<Student[]> {
     return this.httpClient.get<Student[]>(this.restApiUrl);
   }
+  getStudent(id: number): Observable<Student> {
+    const url = `${this.restApiUrl}/${id}`;
+    return this.httpClient.get<Student>(url);
+  }
   updateStudent(student: Student, id: number): Observable<Student> {
     const url = `${this.restApiUrl}/${id}`;
     return this.httpClient.put<Student>(url, student, this.httpOptions);

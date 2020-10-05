@@ -1,9 +1,12 @@
-<span *ngIf="name.length > 1">Hello my name is: {{ name }}</span><br>
-<img [alt]="imageAlt"><br>
-<p *ngFor="let user of names">{{ user }}</p>
-<button (click)="clickHandler()">Click</button><br>
-<p>Moje nazwisko to: {{surname}}</p><br>
-<a [href]="myHref" (mouseover)="clickHandler()">Najedź na mnie a coś zobaczysz</a><br><br>
-<a [href]="myHref" (mouseup)="clickHandler()">Opuść LP myszki a coś zobaczysz</a>
-<app-user></app-user>
-<app-student></app-student>
+<!--<span *ngIf="name.length > 1">Hello my name is: {{ name }}</span><br>-->
+<!--<img [alt]="imageAlt"><br>-->
+<!--<p *ngFor="let user of names">{{ user }}</p>-->
+<!--<button (click)="clickHandler()">Click</button><br>-->
+<!--<p>Moje nazwisko to: {{surname}}</p><br>-->
+<!--<a [href]="myHref" (mouseover)="clickHandler()">Najedź na mnie a coś zobaczysz</a><br><br>-->
+<!--<a [href]="myHref" (mouseup)="clickHandler()">Opuść LP myszki a coś zobaczysz</a>-->
+<!--<app-user></app-user>-->
+<!--<app-student></app-student>-->
+<main class="container">
+  <router-outlet></router-outlet>
+</main>
